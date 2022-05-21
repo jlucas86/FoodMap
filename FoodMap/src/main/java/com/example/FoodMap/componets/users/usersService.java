@@ -14,7 +14,7 @@ public class usersService {
         this.usersRepository = usersRepository;
     }
 
-    public users getUser(int id){
+    public users getUser(Long id){
         return usersRepository.getUser(id);
     }
 

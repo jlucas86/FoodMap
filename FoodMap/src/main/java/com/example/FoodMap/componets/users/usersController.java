@@ -23,7 +23,7 @@ public class usersController {
     }
 
     @GetMapping(path = "getUser/{p0}")
-    public users getUser(@PathVariable("p0") Integer userId ){
+    public users getUser(@PathVariable("p0") Long userId ){
 
         return usersService.getUser(userId);
     }
