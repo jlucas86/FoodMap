@@ -29,8 +29,8 @@ public class usersController {
     }
 
     @PostMapping(path = "addUser")
-    public long createUser(@RequestBody users u){
-        usersService.createUser(u);
+    public long addUser(@RequestBody users u){
+        usersService.addUser(u);
         return 10l;
     }
 

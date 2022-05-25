@@ -86,7 +86,6 @@ public class usersRepositoryTest {
         
         //when
         users ex =  underTest.getUser(u.getId());
-        
         //then
         assertEquals(ex, u);
 

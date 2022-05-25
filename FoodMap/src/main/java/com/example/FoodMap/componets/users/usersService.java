@@ -19,7 +19,7 @@ public class usersService {
     }
 
     @Transactional
-    public void createUser(users u){
+    public void addUser(users u){
         System.out.println(u.getId());
         usersRepository.save(u);
     }
