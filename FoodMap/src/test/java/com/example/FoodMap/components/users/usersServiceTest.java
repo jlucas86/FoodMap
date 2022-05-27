@@ -1,6 +1,9 @@
 package com.example.FoodMap.components.users;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 import com.example.FoodMap.componets.users.users;
@@ -12,6 +15,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.BDDMockito;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -45,7 +49,7 @@ public class usersServiceTest {
     }
 
     @Test
-    public void canAddUser() {
+    public void canAddUser() throws Exception {
         //given
         users u = new users();
         u.setAvalability(0);
@@ -66,5 +70,34 @@ public class usersServiceTest {
         users capturedUser = userArgumentCaptor.getValue();
         assertEquals(capturedUser, u);
         System.out.println(capturedUser.getId());
+    }
+
+    @Test
+    public void throwsExeptionWhenEmailIsTaken() throws Exception{
+        //given
+        users u = new users();
+        u.setAvalability(0);
+        u.setEmail("me@gmail.com");
+        u.setUser_name("hot_mom");
+        u.setPassword("password");
+        u.setRole("reviwer"); 
+
+        users u1 = new users();
+        u1.setAvalability(0);
+        u1.setEmail("meslkdfj@gmail.com");
+        u1.setUser_name("hot_mom");
+        u1.setPassword("password");
+        u1.setRole("reviwer"); 
+        
+        //when
+        //then
+
+        BDDMockito.given(usersRepository.findUsersByEmail(u.getEmail())).willReturn(u1);
+        Exception exception = assertThrows(Exception.class, () -> {
+            underTest.addUser(u);
+        });
+        System.out.println(exception);
+        
+        verify(usersRepository, never()).save(any());
     }
 }

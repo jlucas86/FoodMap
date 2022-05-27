@@ -29,7 +29,7 @@ public class usersController {
     }
 
     @PostMapping(path = "addUser")
-    public long addUser(@RequestBody users u){
+    public long addUser(@RequestBody users u) throws Exception {
         usersService.addUser(u);
         return 10l;
     }

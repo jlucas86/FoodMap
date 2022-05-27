@@ -1,6 +1,9 @@
 package com.example.FoodMap.componets.users;
 
 import javax.transaction.Transactional;
+
+import com.example.FoodMap.componets.exceptions.emailExistsException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +22,9 @@ public class usersService {
     }
 
     @Transactional
-    public void addUser(users u){
-        System.out.println(u.getId());
+    public void addUser(users u) throws Exception {
+        if(usersRepository.findUsersByEmail(u.getEmail()) != null)
+            throw new Exception("email taken");
         usersRepository.save(u);
     }
 

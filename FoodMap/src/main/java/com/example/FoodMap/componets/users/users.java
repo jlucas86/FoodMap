@@ -138,7 +138,6 @@ public class users {
 
     public void setRole(String role) {
         this.role = role;
-        System.out.println("hmm did it work");
     }
 
     public String getPassword() {

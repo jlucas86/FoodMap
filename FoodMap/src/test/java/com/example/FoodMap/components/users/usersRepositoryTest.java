@@ -113,8 +113,7 @@ public class usersRepositoryTest {
         underTest.save(u1);
         
         //when
-        users ex =  underTest.getUser(u.getId());
-        
+        users ex =  underTest.getUser(u.getId()); 
         //then
         assertNotEquals(ex, u1);
 
