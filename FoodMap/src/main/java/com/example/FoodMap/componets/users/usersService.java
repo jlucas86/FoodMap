@@ -23,9 +23,16 @@ public class usersService {
 
     @Transactional
     public void addUser(users u) throws Exception {
-        if(usersRepository.findUsersByEmail(u.getEmail()) != null)
+        if(usersRepository.findUsersByEmail(u.getEmail()) == null)
             throw new Exception("email taken");
         usersRepository.save(u);
+    }
+
+    public void deleteUser(Long id){
+        Boolean exists = usersRepository.existsById(id);
+        if(!exists)
+            throw new IllegalStateException("invalid id");
+        usersRepository.deleteById(id);
     }
 
 }
